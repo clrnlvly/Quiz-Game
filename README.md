@@ -1,2 +1,2 @@
 # Quiz-Game
-mini project
+mini project 1
