@@ -82,6 +82,7 @@ restartButton.addEventListener("click", restartQuiz);
 function startQuiz() {
     //reset vars
     currentQuestionIndex = 0;
+    score = 0;
     scoreSpan.textContent = 0;
 
     startScreen.classList.remove("active");
@@ -103,12 +104,84 @@ function showQuestion () {
 
     questionText.textContent = currentQuestion.question;
 
-    // todo: explain this in a second
     answersContainer.innerHTML = "";
+
+    currentQuestion.answers.forEach(answer => {
+        const button = document.createElement("button");
+        button.textContent = answer.text;
+        button.classList.add("answer-btn");
+        
+        //storing custom data on the button
+        button.dataset.correct = answer.correct;
+
+        button.addEventListener("click", selectAnswer);
+
+        answersContainer.appendChild(button);
+    })
+
 }
 
+
+function selectAnswer(event) {
+    //optimization check
+    if (answersDisabled) return
+
+    answersDisabled = true
+
+    const selectedButton = event.target;
+    const isCorrect = selectedButton.dataset.correct === "true";
+
+    // Array.from is used to convert the Nodelist returned by answerContainer.children into an array, this is because the Nodelist is not an array and we need to use the forEach method
+    Array.from(answersContainer.children).forEach((button) => {
+        if (button.dataset.correct === "true") {
+            button.classList.add("correct");
+        } else if (button === selectedButton) {
+            button.classList.add("incorrect");
+        }   
+    });
+
+    if(isCorrect) {
+        score++;
+        scoreSpan.textContent = score;
+    }
+
+    setTimeout(() => {
+        currentQuestionIndex++;
+        
+        //check if there are more questions or if quiz is over
+        if(currentQuestionIndex < quizQuestions.length) {
+            showQuestion();
+        } else {
+            showResult();
+        }
+    }, 1000);
+}
+
+
+function showResult() {
+    quizScreen.classList.remove("active");
+    resultScreen.classList.add("active");
+
+    finalScoreSpan.textContent = score;
+   
+    const percentage = (score / quizQuestions.length) * 100;
+    
+    if(percentage === 100) {
+        resultMessage.textContent = "Perfect! You got all of the questions right.";
+    }
+    else if (percentage >= 80) {
+        resultMessage.textContent = "Good job! You got most of the questions right.";
+    }
+    else if (percentage >= 60) {
+        resultMessage.textContent = "Not bad! You got some of the questions right.";
+    }
+    else {
+        resultMessage.textContent = "Better luck next time!";
+    }
+}
 
 function restartQuiz() {
-    console.log("quiz restarted");
+    resultScreen.classList.remove("active");
+    
+    startQuiz();
 }
-
