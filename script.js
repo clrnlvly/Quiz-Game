@@ -137,7 +137,112 @@ const quizData = {
                 { text: "Not enough info", correct: false }
             ]
         }
+    ],
+    abstract: [
+        {
+            question: "Which shape completes the pattern: ▲ ● ▲ ● ▲ ?",
+            answers: [
+                { text: "▲", correct: false },
+                { text: "●", correct: true },
+                { text: "■", correct: false },
+                { text: "◆", correct: false }
+            ]
+        },
+        {
+            question: "Which figure is the odd one out?",
+            answers: [
+                { text: "Circle", correct: false },
+                { text: "Square", correct: false },
+                { text: "Triangle", correct: false },
+                { text: "Clock", correct: true }
+            ]
+        }
+    ],
+
+    biology: [
+        {
+            question: "What is the powerhouse of the cell?",
+            answers: [
+                { text: "Nucleus", correct: false },
+                { text: "Mitochondria", correct: true },
+                { text: "Ribosome", correct: false },
+                { text: "Chloroplast", correct: false }
+            ]
+        },
+        {
+            question: "Which system controls the body's response to stimuli?",
+            answers: [
+                { text: "Digestive system", correct: false },
+                { text: "Respiratory system", correct: false },
+                { text: "Nervous system", correct: true },
+                { text: "Circulatory system", correct: false }
+            ]
+        }
+    ],
+
+    chemistry: [
+        {
+            question: "What is the chemical formula for water?",
+            answers: [
+                { text: "CO2", correct: false },
+                { text: "H2O", correct: true },
+                { text: "O2", correct: false },
+                { text: "NaCl", correct: false }
+            ]
+        },
+        {
+            question: "Which of these is a noble gas?",
+            answers: [
+                { text: "Oxygen", correct: false },
+                { text: "Nitrogen", correct: false },
+                { text: "Helium", correct: true },
+                { text: "Hydrogen", correct: false }
+            ]
+        }
+    ],
+
+    physics: [
+        {
+            question: "What is the unit of force?",
+            answers: [
+                { text: "Watt", correct: false },
+                { text: "Newton", correct: true },
+                { text: "Pascal", correct: false },
+                { text: "Joule", correct: false }
+            ]
+        },
+        {
+            question: "What is the speed of light in vacuum?",
+            answers: [
+                { text: "3 x 10⁸ m/s", correct: true },
+                { text: "1.5 x 10⁸ m/s", correct: false },
+                { text: "3 x 10⁶ m/s", correct: false },
+                { text: "300 m/s", correct: false }
+            ]
+        }
+    ],
+
+    social: [
+        {
+            question: "Who was the first president of the Philippines?",
+            answers: [
+                { text: "Emilio Aguinaldo", correct: true },
+                { text: "Manuel Quezon", correct: false },
+                { text: "Jose Rizal", correct: false },
+                { text: "Andres Bonifacio", correct: false }
+            ]
+        },
+        {
+            question: "Which organization was created to maintain international peace after WWII?",
+            answers: [
+                { text: "ASEAN", correct: false },
+                { text: "UN", correct: true },
+                { text: "NATO", correct: false },
+                { text: "WHO", correct: false }
+            ]
+        }
     ]
+
 };
 
 // State
