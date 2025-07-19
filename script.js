@@ -1,4 +1,4 @@
-//DOM Elements
+// DOM Elements
 const startScreen = document.getElementById("start-screen");
 const quizScreen = document.getElementById("quiz-screen");
 const resultScreen = document.getElementById("result-screen");
@@ -14,142 +14,217 @@ const resultMessage = document.getElementById("result-message");
 const restartButton = document.getElementById("restart-btn");
 const progressBar = document.getElementById("progress");
 
-const quizQuestions = [
+const navButtons = document.querySelectorAll(".nav-subject");
 
-    {
-        question: "What is the capital of france?",
-        answers: [
-            { text: "London", correct: false },
-            { text: "Paris", correct: true },
-            { text: "Berlin", correct: false },
-            { text: "Rome", correct: false }
-        ],
-    },
 
-    {
-        question: "What is the capital of germany?",
-        answers: [
-            { text: "London", correct: false },
-            { text: "Paris", correct: false },
-            { text: "Berlin", correct: true },
-            { text: "Rome", correct: false }
-        ],
-    },
+navButtons.forEach(button => {
+    button.addEventListener("click", () => {
+        // Remove active class
+        navButtons.forEach(btn => btn.classList.remove("active"));
+        button.classList.add("active");
 
-    {
-        question: "What is the capital of italy?",
-        answers: [
-            { text: "London", correct: false },
-            { text: "Paris", correct: false },
-            { text: "Berlin", correct: false },
-            { text: "Rome", correct: true }
-        ],
-    },
+        currentSubject = button.dataset.subject;
+        quizQuestions = quizData[currentSubject] || [];
+        currentQuestionIndex = 0;
+        score = 0;
 
-    {
-        question: "What is the capital of spain?",
-        answers: [
-            { text: "London", correct: false },
-            { text: "Paris", correct: false },
-            { text: "Berlin", correct: false },
-            { text: "Madrid", correct: true }
-        ],
-    },
+        scoreSpan.textContent = score;
+        totalQuestionsSpan.textContent = quizQuestions.length;
+        maxScoreSpan.textContent = quizQuestions.length;
 
-    {
-        question: "What is the capital of portugal?",
-        answers: [
-            { text: "London", correct: false },
-            { text: "Paris", correct: false },
-            { text: "Berlin", correct: false },
-            { text: "Lisbon", correct: true }
-        ],
-    },
-];
+        // ✅ Change the h1 title
+        const quizTitle = document.getElementById("quiz-title");
+        quizTitle.textContent = `${button.textContent} Quiz`;
 
-// QUIZ STATE VARIABLES
- let currentQuestionIndex = 0;
- let score = 0;
- let answersDisabled = false;
+        showScreen(startScreen);
+    });
+});
 
-totalQuestionsSpan.textContent = quizQuestions.length;
-maxScoreSpan.textContent = quizQuestions.length;
+window.addEventListener("DOMContentLoaded", () => {
+    // Find the "Verbal" subject button
+    const defaultButton = document.querySelector('.nav-subject[data-subject="verbal"]');
+    if (defaultButton) {
+        defaultButton.click(); // Simulate a click to set Verbal as default
+    }
+});
 
-// event listeners
+
+// Subject-based quizzes
+const quizData = {
+    verbal: [
+        {
+            question: "What is a synonym for 'happy'?",
+            answers: [
+                { text: "Sad", correct: false },
+                { text: "Joyful", correct: true },
+                { text: "Angry", correct: false },
+                { text: "Tired", correct: false }
+            ]
+        },
+        {
+            question: "Which sentence is grammatically correct?",
+            answers: [
+                { text: "He don't like pizza.", correct: false },
+                { text: "He doesn't likes pizza.", correct: false },
+                { text: "He doesn't like pizza.", correct: true },
+                { text: "He don't likes pizza.", correct: false }
+            ]
+        },
+        {
+            question: "Choose the correct spelling.",
+            answers: [
+                { text: "Definately", correct: false },
+                { text: "Definitely", correct: true },
+                { text: "Defanitely", correct: false },
+                { text: "Definetely", correct: false }
+            ]
+        }
+    ],
+    quantitative: [
+        {
+            question: "What is 12 × 8?",
+            answers: [
+                { text: "96", correct: true },
+                { text: "84", correct: false },
+                { text: "108", correct: false },
+                { text: "112", correct: false }
+            ]
+        },
+        {
+            question: "What is the square root of 81?",
+            answers: [
+                { text: "9", correct: true },
+                { text: "8", correct: false },
+                { text: "7", correct: false },
+                { text: "6", correct: false }
+            ]
+        },
+        {
+            question: "Solve: 15 + 3 × 2",
+            answers: [
+                { text: "36", correct: false },
+                { text: "21", correct: true },
+                { text: "18", correct: false },
+                { text: "24", correct: false }
+            ]
+        }
+    ],
+    logical: [
+        {
+            question: "If today is Monday, what day will it be 10 days from now?",
+            answers: [
+                { text: "Wednesday", correct: false },
+                { text: "Thursday", correct: true },
+                { text: "Friday", correct: false },
+                { text: "Saturday", correct: false }
+            ]
+        },
+        {
+            question: "What comes next in the sequence: 2, 4, 8, 16, ...?",
+            answers: [
+                { text: "20", correct: false },
+                { text: "24", correct: false },
+                { text: "32", correct: true },
+                { text: "30", correct: false }
+            ]
+        },
+        {
+            question: "All apples are fruits. All fruits grow on trees. So, all apples grow on trees. Is the conclusion valid?",
+            answers: [
+                { text: "Yes", correct: true },
+                { text: "No", correct: false },
+                { text: "Only if red", correct: false },
+                { text: "Not enough info", correct: false }
+            ]
+        }
+    ]
+};
+
+// State
+let currentSubject = null;
+let quizQuestions = [];
+let currentQuestionIndex = 0;
+let score = 0;
+let answersDisabled = false;
+
+// Handle subject button clicks
+navButtons.forEach(button => {
+    button.addEventListener("click", () => {
+        currentSubject = button.dataset.subject;
+        quizQuestions = quizData[currentSubject] || [];
+        currentQuestionIndex = 0;
+        score = 0;
+
+        scoreSpan.textContent = score;
+        totalQuestionsSpan.textContent = quizQuestions.length;
+        maxScoreSpan.textContent = quizQuestions.length;
+
+        showScreen(startScreen);
+    });
+});
+
+// Event listeners
 startButton.addEventListener("click", startQuiz);
 restartButton.addEventListener("click", restartQuiz);
 
 function startQuiz() {
-    //reset vars
+    if (!quizQuestions || quizQuestions.length === 0) {
+        alert("No quiz available for this subject.");
+        return;
+    }
+
     currentQuestionIndex = 0;
     score = 0;
-    scoreSpan.textContent = 0;
+    scoreSpan.textContent = score;
 
-    startScreen.classList.remove("active");
-    quizScreen.classList.add("active");
-
+    showScreen(quizScreen);
     showQuestion();
 }
 
-function showQuestion () {
-    //reset state
+function showQuestion() {
     answersDisabled = false;
 
     const currentQuestion = quizQuestions[currentQuestionIndex];
-
+    questionText.textContent = currentQuestion.question;
     currentQuestionSpan.textContent = currentQuestionIndex + 1;
 
     const progressPercent = (currentQuestionIndex / quizQuestions.length) * 100;
     progressBar.style.width = progressPercent + "%";
 
-    questionText.textContent = currentQuestion.question;
-
     answersContainer.innerHTML = "";
-
     currentQuestion.answers.forEach(answer => {
         const button = document.createElement("button");
         button.textContent = answer.text;
         button.classList.add("answer-btn");
-        
-        //storing custom data on the button
         button.dataset.correct = answer.correct;
-
         button.addEventListener("click", selectAnswer);
-
         answersContainer.appendChild(button);
-    })
-
+    });
 }
 
-
 function selectAnswer(event) {
-    //optimization check
-    if (answersDisabled) return
-
-    answersDisabled = true
+    if (answersDisabled) return;
+    answersDisabled = true;
 
     const selectedButton = event.target;
     const isCorrect = selectedButton.dataset.correct === "true";
 
-    // Array.from is used to convert the Nodelist returned by answerContainer.children into an array, this is because the Nodelist is not an array and we need to use the forEach method
     Array.from(answersContainer.children).forEach((button) => {
         if (button.dataset.correct === "true") {
             button.classList.add("correct");
         } else if (button === selectedButton) {
             button.classList.add("incorrect");
-        }   
+        }
     });
 
-    if(isCorrect) {
+    if (isCorrect) {
         score++;
         scoreSpan.textContent = score;
     }
 
     setTimeout(() => {
         currentQuestionIndex++;
-        
-        //check if there are more questions or if quiz is over
-        if(currentQuestionIndex < quizQuestions.length) {
+        if (currentQuestionIndex < quizQuestions.length) {
             showQuestion();
         } else {
             showResult();
@@ -157,31 +232,32 @@ function selectAnswer(event) {
     }, 1000);
 }
 
-
 function showResult() {
-    quizScreen.classList.remove("active");
-    resultScreen.classList.add("active");
-
+    showScreen(resultScreen);
     finalScoreSpan.textContent = score;
-   
+
     const percentage = (score / quizQuestions.length) * 100;
-    
-    if(percentage === 100) {
+
+    if (percentage === 100) {
         resultMessage.textContent = "Perfect! You got all of the questions right.";
-    }
-    else if (percentage >= 80) {
+    } else if (percentage >= 80) {
         resultMessage.textContent = "Good job! You got most of the questions right.";
-    }
-    else if (percentage >= 60) {
+    } else if (percentage >= 60) {
         resultMessage.textContent = "Not bad! You got some of the questions right.";
-    }
-    else {
+    } else {
         resultMessage.textContent = "Better luck next time!";
     }
 }
 
 function restartQuiz() {
-    resultScreen.classList.remove("active");
-    
-    startQuiz();
+    score = 0;
+    currentQuestionIndex = 0;
+    scoreSpan.textContent = score;
+    showScreen(startScreen);
 }
+
+function showScreen(screen) {
+    [startScreen, quizScreen, resultScreen].forEach(s => s.classList.remove("active"));
+    screen.classList.add("active");
+}
+ss

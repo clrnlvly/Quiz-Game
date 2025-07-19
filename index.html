@@ -7,9 +7,20 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="nav-top-bar">
+        <button class="nav-subject active" data-subject="verbal">Verbal</button>
+        <button class="nav-subject" data-subject="quantitative">Quantitative</button>
+        <button class="nav-subject" data-subject="logical">Logical Reasoning</button>
+        <button class="nav-subject" data-subject="abstract">Abstract Reasoning</button>
+        <button class="nav-subject" data-subject="biology">Biology</button>
+        <button class="nav-subject" data-subject="chemistry">Chemistry</button>
+        <button class="nav-subject" data-subject="physics">Physics</button>
+        <button class="nav-subject" data-subject="social">Social Sciences</button>
+    </div>
+
     <div class="container">
         <div class="screen active" id="start-screen">
-            <h1>Quiz Time!</h1>
+            <h1 id="quiz-title">Verbal Quiz</h1>
             <p>Test your knowledge with these fun questions.</p>
             <button id="start-btn">Start Quiz</button>
         </div>

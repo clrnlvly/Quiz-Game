@@ -9,10 +9,50 @@ body {
     background: #f5efe6;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     min-height: 100vh;
-    padding: 1rem;
+    padding: 10rem 1rem 1rem;
     font-family: sans-serif;
+}
+
+.nav-top-bar {
+    position: fixed;
+    top: 20px;
+    left: 0;
+    width: 100%;
+    /* background-color: #fff; */
+    padding: 10px 20px;
+    /* box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); */
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+    z-index: 1000;
+    font-weight: bold;
+}
+
+/* Default button style */
+.nav-subject {
+  background-color: #f0f0f0;
+  color: #333;
+  border: none;
+  padding: 10px 20px;
+  margin: 4px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* Hover effect */
+.nav-subject:hover {
+  background-color: #d0ebff;
+  color: #007bff;
+}
+
+/* Active subject (selected) */
+.nav-subject.active {
+  background-color: #007bff;
+  color: white;
 }
 
 .container {
@@ -38,7 +78,7 @@ body {
 
 /*START SCREEN*/
 #start-screen h1 {
-    color: #e86a33;
+    color: #007bff;
     margin-bottom: 20px;
     font-size: 2.5rem;
 }
@@ -113,14 +153,14 @@ body {
 
 .progress {
     height: 100%;
-    background-color: #e86a33;
+    background-color: #007bff;
     width: 0%;
     transition: width 0.3s ease;
 }
 
 /* RESULT SCREEN */
 #result-screen h1 {
-    color: #e86a33;
+    color: #007bff;
     margin-bottom: 30px;
 }
 
@@ -140,11 +180,11 @@ body {
 #result-message {
     font-size: 1.5rem;
     font-weight: 600;
-    color: #e86a33;
+    color: #007bff;
 }
 
 button {
-    background-color: #e86a33;
+    background-color: #007bff;
     color: white;
     border: none;
     border-radius: 10px;
@@ -155,7 +195,7 @@ button {
 }
 
 button:hover {
-    background-color: #d45b28;
+    background-color: #005dc0;
 }
 
 /* RESPONSIVE DESIGN */
