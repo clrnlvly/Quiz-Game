@@ -5,14 +5,13 @@ A fun and interactive quiz game built with **HTML**, **CSS**, and **JavaScript**
 ## 🔗 Live Demo  
 [🔗 View on GitHub Pages](https://clrnlvly.github.io/Quiz-Game/)
 
+## Youtube: https://youtu.be/pSLF5Hfg-tw
 ---
 
 ## ✨ Features
 
 - ✅ Multiple-choice questions
 - 🧮 Real-time score tracking
-- ⏱️ Countdown timer per question
-- 📱 Responsive and mobile-friendly
 
 ---
 
