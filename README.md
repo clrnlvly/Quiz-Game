@@ -5,7 +5,7 @@ A fun and interactive quiz game built with **HTML**, **CSS**, and **JavaScript**
 ## 🔗 Live Demo  
 [🔗 View on GitHub Pages](https://clrnlvly.github.io/Quiz-Game/)
 
-## Youtube: https://youtu.be/pSLF5Hfg-tw
+## Video Demo: https://drive.google.com/file/d/1FP6DYZdeqc8INJOU5thTG7wMaNZT_yxy/view?usp=drive_link
 ---
 
 ## ✨ Features
